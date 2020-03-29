@@ -11,7 +11,6 @@ $conn = new mysqli($server, $username , $pass , $dbname);
 if($conn->connect_error){
     die("Connection failed :" . $conn->connect_error);
 }
-parse_str(file_get_contents('php://input'),$_PUT);
 $method = $_SERVER['REQUEST_METHOD'];
 $json = [];
 $i = 1;
@@ -45,6 +44,7 @@ if ($method == 'GET'){
         $conn->query($sql);
     }
     else if ($method == 'PUT'){
+        parse_str(file_get_contents('php://input'),$_PUT);
         $id = $_PUT['id'];
         $nama = $_PUT['nama'];
         $umur = $_PUT['umur'];
@@ -57,12 +57,13 @@ if ($method == 'GET'){
         $conn->query($sql);
     }
     else if ($method == 'DELETE'){
+        parse_str(file_get_contents('php://input'),$_DELETE);
         $id = $_DELETE['id'];
-      
+        
         $sql = "DELETE ODP FROM ODP WHERE id = '$id'";
         $conn->query($sql);
     }
     $data = ['data' => $json];
     echo json_encode($data);
-
+    
 ?>
