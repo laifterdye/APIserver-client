@@ -2,7 +2,7 @@
 header('Content-Type:application/json');
 $server = "localhost";
 $username = "root";
-$dbname = "corona";
+$dbname = "covid19";
 $pass = "";
 
 
